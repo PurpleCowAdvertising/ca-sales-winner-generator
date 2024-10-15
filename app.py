@@ -7,7 +7,6 @@ import datetime
 st.title("CA Sales Winner Generator")
 st.write("This tool generates random winners from a CA Sales campaign file.")
 
-
 # Inputs for the campaign
 campaign_name = st.text_input("Campaign Name", "example-campaign")
 current_date = st.date_input("Draw Date")
@@ -29,7 +28,7 @@ if uploaded_file is not None:
         st.error(f"Column '{column_name}' not found in the uploaded file. Please check the file format.")
     else:
         # Identify unique eligible cell numbers
-        unique_cell_numbers = set(df[column_name].unique())
+        unique_cell_numbers = list(set(df[column_name].dropna().unique()))
 
         # Check if there are enough eligible numbers to pick winners
         if len(unique_cell_numbers) < number_of_winners:
